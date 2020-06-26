@@ -1,0 +1,7 @@
+{% load static %}
+<link rel="stylesheet" type="text/css" href={% static 'previewstyle.css' %}>
+<html style="background-color:#292929;">
+<div style="background-color:#292929;">
+    <iframe src="https://open.spotify.com/embed/track/{{ songs.song_id }}" width="600" height="680" frameborder="0" allowtransparency="true" allow="encrypted-media" ></iframe>
+</div>
+</html>

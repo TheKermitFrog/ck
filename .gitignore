@@ -1,0 +1,14 @@
+#ignore log
+*.log
+
+#ignore credentials
+**/ck/credentials.py
+
+#ignore csv files
+*.csv
+
+#ignore cached credentials
+*.cache-ct9h0dxd6nw3y0i0jwbeql8q7
+
+#ignore django secret
+**/ck/django_secret_key.py

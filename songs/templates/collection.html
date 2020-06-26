@@ -1,0 +1,49 @@
+{% load static %}
+<html lang="en-US">
+<head>
+  <meta charset="UTF-8">
+   <link rel="stylesheet" type="text/css" href={% static 'tablestyle.css' %}>
+   <script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+   <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+  
+  <script type="text/javascript">
+  $(document).ready( function () {
+    $('#flexme').DataTable({
+
+      "order": [[6, 'asc']],
+      "pageLength": 25
+    });
+  } );
+  </script>
+
+</head>
+<body style="background-color:#292929;">
+  <table id='flexme' class="row-border compact stripe hover">
+    <thead>
+      <tr class="table-head">
+        <th class="column1" style="color:white">Title</th>
+        <th class="column2" style="color:white">Artist</th>
+        <th class="column3" style="color:white">Album</th>
+        <th class="column4" style="color:white">Release Year</th>
+        <th class="column5" style="color:white">Artist Genres</th>
+        <th class="column6" style="color:white">Added by</th>
+        <th class="column7" style="color:white">Added at</th>
+      </tr>
+    </thead>
+    <tbody id='songsbody'>
+      {% for song in songs %}
+      <tr>
+        <td class="column1" style="color:white">
+          <a href={% url 'previews' song.id %} target="_blank" style="color:white";>{{ song.title }}</a></>
+        <td class="column2" style="color:white">{{ song.artist }}</td>
+        <td class="column3" style="color:white">{{ song.album }}</td>
+        <td class="column4" style="color:white">{{ song.release_year }}</td>
+        <td class="column5" style="color:white">{{ song.artist_genres }}</td>
+        <td class="column6" style="color:white">{{ song.added_by }}</td>
+        <td class="column7" style="color:white">{{ song.added_at }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</body>
+</html>
