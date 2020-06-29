@@ -131,9 +131,9 @@ STATICFILES_DIRS = [
 # Define CRONJOBS
 # output to log
 CRONJOBS = [
-    # ('*/1 * * * *', 'ck.cron.check_for_update', '>> /Users/darrenwang/Desktop/作品集/CKhardrockers/ck/test.log'),
-    # ('*/1 * * * *', 'ck.cron.update', '>> /Users/darrenwang/Desktop/作品集/CKhardrockers/ck/test.log'),
-    ('*/1 * * * *', 'ck.cron.remove_csv_data', '>> /Users/darrenwang/Desktop/作品集/CKhardrockers/ck/test.log'),
+    ('0 0 * * 0', 'ck.cron.check_for_update', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
+    ('0 0 * * 0', 'ck.cron.update', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
+    ('0 0 * * 3', 'ck.cron.remove_csv_data', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
 ]
 
 # Redirect CRONJOBS' output to stdout and stderr
