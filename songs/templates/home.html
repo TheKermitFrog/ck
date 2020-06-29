@@ -1,7 +1,7 @@
 {% load static %}
 
 <html lang="en">
-<title>W3.CSS Template</title>
+<title>CKHardrockers</title>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
@@ -11,6 +11,23 @@
 body {font-family: "Lato", sans-serif}
 .mySlides {display: none}
 </style>
+
+<!-- table style -->
+<link rel="stylesheet" type="text/css" href={% static 'tablestyle_home.css' %}>
+<script type="text/javascript" charset="utf8" src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js"></script>
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
+
+<script type="text/javascript">
+$(document).ready( function () {
+ $('#flexme').DataTable({
+
+   "order": [[6, 'asc']],
+   "pageLength": 10
+ });
+} );
+</script>
+<!-- table style ends -->
+
 <body>
 
 <!-- Navbar -->
@@ -67,9 +84,9 @@ body {font-family: "Lato", sans-serif}
     </div>
   </div> -->
 
-  <!-- The Band Section -->
+  <!-- The Playlist Section -->
   <div class="w3-container w3-content w3-center w3-padding-64" style="max-width:800px" id="playlist">
-    <h2 class="w3-wide">THE PLAYLIST</h2>
+    <h2 class="w3-wide">The Playlist</h2>
     <p class="w3-opacity"><i>Featuring songs we shared together.</i></p>
     <div>
       <iframe src="https://open.spotify.com/embed/playlist/43E3cju7xCSKxoip9QWV7i" width="800" height="500" frameborder="0" allowtransparency="true" allow="encrypted-media"></iframe></p>
@@ -90,13 +107,43 @@ body {font-family: "Lato", sans-serif}
     </div> -->
   </div>
 
-  <!-- The Tour Section -->
+  <!-- Collection Section -->
   <div class="w3-black" id="collection">
-    <div class="w3-container w3-content w3-padding-64" style="max-width:800px">
-      <h2 class="w3-wide w3-center">TOUR DATES</h2>
-      <p class="w3-opacity w3-center"><i>Remember to book your tickets!</i></p><br>
+    <div class="w3-container w3-content w3-padding-64" style="max-width:1500px">
+      <h2 class="w3-wide w3-center">Collection</h2>
+      <p class="w3-opacity w3-center">Additional information of each songs is also archived
+      </p><br>
+      <div>
+      <table id='flexme' class="row-border compact stripe hover">
+        <thead>
+          <tr class="table-head">
+            <th class="column1" style="color:white">Title</th>
+            <th class="column2" style="color:white">Artist</th>
+            <th class="column3" style="color:white">Album</th>
+            <th class="column4" style="color:white">Release Year</th>
+            <th class="column5" style="color:white">Artist Genres</th>
+            <th class="column6" style="color:white">Added by</th>
+            <th class="column7" style="color:white">Added at</th>
+          </tr>
+        </thead>
+        <tbody id='songsbody'>
+          {% for song in songs %}
+          <tr>
+            <td class="column1" style="color:white">
+              <a href={% url 'previews' song.id %} target="_blank" style="color:white";>{{ song.title }}</a></>
+            <td class="column2" style="color:white">{{ song.artist }}</td>
+            <td class="column3" style="color:white">{{ song.album }}</td>
+            <td class="column4" style="color:white">{{ song.release_year }}</td>
+            <td class="column5" style="color:white">{{ song.artist_genres }}</td>
+            <td class="column6" style="color:white">{{ song.added_by }}</td>
+            <td class="column7" style="color:white">{{ song.added_at }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
 
-      <ul class="w3-ul w3-border w3-white w3-text-grey">
+      <!-- <ul class="w3-ul w3-border w3-white w3-text-grey">
         <li class="w3-padding">September <span class="w3-tag w3-red w3-margin-left">Sold out</span></li>
         <li class="w3-padding">October <span class="w3-tag w3-red w3-margin-left">Sold out</span></li>
         <li class="w3-padding">November <span class="w3-badge w3-right w3-margin-right">3</span></li>
@@ -130,7 +177,7 @@ body {font-family: "Lato", sans-serif}
             <button class="w3-button w3-black w3-margin-bottom" onclick="document.getElementById('ticketModal').style.display='block'">Buy Tickets</button>
           </div>
         </div>
-      </div>
+      </div> -->
     </div>
   </div>
 

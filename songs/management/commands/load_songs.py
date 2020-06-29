@@ -1,5 +1,5 @@
 from csv import DictReader
-from datetime import datetime
+import datetime
 import os
 import sys
 from django.core.management import BaseCommand
@@ -33,7 +33,7 @@ class Command(BaseCommand):
                 song.artist_genres = row['Genres(Artist)']
                 raw_added_date = row['Added at']
                 added_date =  UTC.localize(
-                    datetime.strptime(raw_added_date, DATE_FORMAT))
+                    datetime.datetime.strptime(raw_added_date, DATE_FORMAT))
                 song.added_at = added_date
                 song.added_by = row['Added by']
                 song.song_id = row['song_id']
