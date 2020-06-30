@@ -2,6 +2,7 @@ import spotipy
 import spotipy.util as util
 import os
 import pandas as pd
+import math
 from .credentials import credentials
 
 class CK_spotify:

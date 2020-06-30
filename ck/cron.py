@@ -13,7 +13,7 @@ def check_for_update():
     ids = client.get_songs_id()
     if len(ids) >= 100:
         print('Over 100 songs, transferring to archive')
-        # client.to_csv()
+        client.to_csv()
         client.transfer_songs()
         print()
     else:
