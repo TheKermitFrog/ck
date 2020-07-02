@@ -25,7 +25,7 @@ Name the token .cached-your_user_id or simply copy the existing token, put it in
 
 ## Calling django's management function with django-crontab
 
-In cron.py do:
+In cron.py:
 
 ```Python
 from django.core.management import call_command
@@ -33,6 +33,25 @@ from django.core.management import call_command
 def your_command():
     call_command('your_custom_command', verbosity=0, interactive=False)
     return
+```
+
+In settings.py:
+
+```Python
+CRONJOBS = [
+    ('0 0 * * 1', 'your_project.cron.your_command', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
+]
+
+# Redirect CRONJOBS' output to stdout and stderr
+CRONTAB_COMMAND_SUFFIX = '2>&1'
+```
+Adding CRONTAB_COMMAND_SUFFIX = '2>&1' would redirect CRONJOBS' output to stdout and stderr, thus allow you to write output to file, very useful.
+
+To avoid TypeError: Unknown option(s) for your_custom_command, you would want to add a stealth_options tuple to your Command class. In my case, that is:
+
+```Python
+class Command(BaseCommand):
+    stealth_options = ("interactive",)
 ```
 
 **WHOLE WEBSITE PREVIEW**
