@@ -40,6 +40,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+
+    # apps and addons
     'songs',
     'django_crontab'
 ]
@@ -131,8 +133,10 @@ STATICFILES_DIRS = [
 # Define CRONJOBS
 # output to log
 CRONJOBS = [
-    ('0 0 * * 0', 'ck.cron.check_for_update', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
-    ('0 0 * * 0', 'ck.cron.update', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
+    # check for update ad update on Monday Morning
+    ('0 0 * * 1', 'ck.cron.check_for_update', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
+    ('0 0 * * 1', 'ck.cron.update', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
+    # delete data file on Wednesday morning
     ('0 0 * * 3', 'ck.cron.remove_csv_data', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
 ]
 

@@ -37,6 +37,7 @@ $(document).ready( function () {
     <a href="#" class="w3-bar-item w3-button w3-padding-large">Home</a>
     <a href="#playlist" class="w3-bar-item w3-button w3-padding-large w3-hide-small">The Playlist</a>
     <a href="#collection" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Collection</a>
+    <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">Contact</a>
     <!-- <a href="#contact" class="w3-bar-item w3-button w3-padding-large w3-hide-small">CONTACT</a> -->
     <!-- <div class="w3-dropdown-hover w3-hide-small">
       <button class="w3-padding-large w3-button" title="More">MORE <i class="fa fa-caret-down"></i></button>
@@ -111,7 +112,8 @@ $(document).ready( function () {
   <div class="w3-black" id="collection">
     <div class="w3-container w3-content w3-padding-64" style="max-width:1500px">
       <h2 class="w3-wide w3-center">Collection</h2>
-      <p class="w3-opacity w3-center">Additional information of each songs is also archived
+      <p class="w3-opacity w3-center">Additional information of each song is also archived,
+        <a href={% url 'collection' %} target="_blank" style="color:white";>click here</a></> to view in full screen.
       </p><br>
       <div>
       <table id='flexme' class="row-border compact stripe hover">
@@ -182,7 +184,7 @@ $(document).ready( function () {
   </div>
 
   <!-- Ticket Modal -->
-  <div id="ticketModal" class="w3-modal">
+  <!-- <div id="ticketModal" class="w3-modal">
     <div class="w3-modal-content w3-animate-top w3-card-4">
       <header class="w3-container w3-teal w3-center w3-padding-32">
         <span onclick="document.getElementById('ticketModal').style.display='none'"
@@ -199,7 +201,7 @@ $(document).ready( function () {
         <p class="w3-right">Need <a href="#" class="w3-text-blue">help?</a></p>
       </div>
     </div>
-  </div>
+  </div> -->
 
   <!-- The Contact Section -->
   <div class="w3-container w3-content w3-padding-64" style="max-width:800px" id="contact">
@@ -207,9 +209,10 @@ $(document).ready( function () {
     <p class="w3-opacity w3-center"><i>Fan? Drop a note!</i></p>
     <div class="w3-row w3-padding-32">
       <div class="w3-col m6 w3-large w3-margin-bottom">
-        <i class="fa fa-map-marker" style="width:30px"></i> Chicago, US<br>
-        <i class="fa fa-phone" style="width:30px"></i> Phone: +00 151515<br>
-        <i class="fa fa-envelope" style="width:30px"> </i> Email: mail@mail.com<br>
+        <i class="fa fa-map-marker" style="width:30px"></i> Champaign, IL, US<br>
+        <i class="fa fa-phone" style="width:30px"></i> Github:
+        <a href="https://github.com/TheKermitFrog/ck" target="_blank";>TheKermitFrog</a></><br>
+        <i class="fa fa-envelope" style="width:30px"> </i> Email: darrenwww210@gmail.com<br>
       </div>
       <div class="w3-col m6">
         <form action="/action_page.php" target="_blank">
@@ -232,8 +235,7 @@ $(document).ready( function () {
 </div>
 
 <!-- Image of location/map -->
-<img src="/w3images/map.jpg" class="w3-image w3-greyscale-min" style="width:100%">
-
+<img src={% static 'endpage.jpg' %} style="width:100%">
 <!-- Footer -->
 <footer class="w3-container w3-padding-64 w3-center w3-opacity w3-light-grey w3-xlarge">
   <i class="fa fa-facebook-official w3-hover-opacity"></i>
