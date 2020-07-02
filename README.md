@@ -12,18 +12,28 @@
 **Project Highlights**
 
 - Using Spotipy to retrieve data from Spotify via django-crontab
-- [Letting django-crontab pass Spotipy's authentication flow](##-letting-django-crontab-pass-spotipy-s-authentication-flow)
+- [Letting cronjob/django-crontab pass Spotipy's authentication flow](##-letting-django-crontab-pass-spotipy-s-authentication-flow)
 - [Calling django's management function with django-crontab](##-calling-django-s-management-function-with-django-crontab)
 ---
 
-## Letting django-crontab pass Spotipy's authentication flow
+## Letting cronjob/django-crontab pass Spotipy's authentication flow
 
-- All the `code` required to get started
-- Images of what it should look like
+It's possible to use prompt_for_user_token method in the spotipy.util module in your cronjob for authenticating Spotipy, you just need a cached token. 
+Follow the guide at: https://benwiz.io/blog/create-spotify-refresh-token/ of how to generate a token. If you have runned Spotipy somewhere else and managed to get pass the authentication flow once, there would be a cached token named .cached-your_user_id under the same directory. 
+
+Name the token .cached-your_user_id or simply copy the existing token, put it in the same directory of your cronjob. Now, whenever you call prompt_for_user_token, the script would simply refresh the token instead of requiring to input a redirect URI.
 
 ## Calling django's management function with django-crontab
 
-- Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
+In cron.py do:
+
+```Python
+from django.core.management import call_command
+
+def your_command():
+    call_command('your_custom_command', verbosity=0, interactive=False)
+    return
+```
 
 **WHOLE WEBSITE PREVIEW**
 
