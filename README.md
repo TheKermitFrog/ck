@@ -29,134 +29,49 @@
 
 ![ttystudio GIF](https://raw.githubusercontent.com/chjj/ttystudio/master/img/example.gif)
 
+- Using Spotipy to retrieve data from Spotify via django-crontab
+- [Letting cronjob/django-crontab pass Spotipy's authentication flow](##-letting-django-crontab-pass-spotipy-s-authentication-flow)
+- [Calling django's management function with django-crontab](##-calling-django-s-management-function-with-django-crontab)
 ---
 
-## Table of Contents (Optional)
+## Letting cronjob/django-crontab pass Spotipy's authentication flow
 
-> If your `README` has a lot of info, section headers might be nice.
+It's possible to use prompt_for_user_token method in the spotipy.util module in your cronjob for authenticating Spotipy, you just need a cached token.
+Follow the guide at: https://benwiz.io/blog/create-spotify-refresh-token/ of how to generate a token. If you have runned Spotipy somewhere else and managed to get pass the authentication flow once, there would be a cached token named .cached-your_user_id under the same directory.
 
-- [Installation](#installation)
-- [Features](#features)
-- [Contributing](#contributing)
-- [Team](#team)
-- [FAQ](#faq)
-- [Support](#support)
-- [License](#license)
+Name the token .cached-your_user_id or simply copy the existing token, put it in the same directory of your cronjob. Now, whenever you call prompt_for_user_token, the script would simply refresh the token instead of requiring to input a redirect URI.
 
+## Calling django's management function with django-crontab
 
----
+In cron.py:
 
-## Example (Optional)
+```Python
+from django.core.management import call_command
 
-```javascript
-// code away!
-
-let generateProject = project => {
-  let code = [];
-  for (let js = 0; js < project.length; js++) {
-    code.push(js);
-  }
-};
+def your_command():
+    call_command('your_custom_command', verbosity=0, interactive=False)
+    return
 ```
 
----
+In settings.py:
 
-## Installation
+```Python
+CRONJOBS = [
+    ('0 0 * * 1', 'your_project.cron.your_command', '>>' + os.path.join(BASE_DIR, 'cronjob.log')),
+]
 
-- All the `code` required to get started
-- Images of what it should look like
+# Redirect CRONJOBS' output to stdout and stderr
+CRONTAB_COMMAND_SUFFIX = '2>&1'
+```
+Adding CRONTAB_COMMAND_SUFFIX = '2>&1' would redirect CRONJOBS' output to stdout and stderr, thus allow you to write output to file, very useful.
 
-### Clone
+To avoid TypeError: Unknown option(s) for your_custom_command, you would want to add a stealth_options tuple to your Command class. In my case, that is:
 
-- Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
-
-### Setup
-
-- If you want more syntax highlighting, format your code like this:
-
-> update and install this package first
-
-```shell
-$ brew update
-$ brew install fvcproductions
+```Python
+class Command(BaseCommand):
+    stealth_options = ("interactive",)
 ```
 
-> now install npm and bower packages
+### WHOLE WEBSITE PREVIEW
 
-```shell
-$ npm install
-$ bower install
-```
-
-- For all the possible languages that support syntax highlithing on GitHub (which is basically all of them), refer <a href="https://github.com/github/linguist/blob/master/lib/linguist/languages.yml" target="_blank">here</a>.
-
----
-
-## Features
-## Usage (Optional)
-## Documentation (Optional)
-## Tests (Optional)
-
-- Going into more detail on code and technologies used
-- I utilized this nifty <a href="https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet" target="_blank">Markdown Cheatsheet</a> for this sample `README`.
-
----
-
-## Contributing
-
-> To get started...
-
-### Step 1
-
-- **Option 1**
-    - 🍴 Fork this repo!
-
-- **Option 2**
-    - 👯 Clone this repo to your local machine using `https://github.com/joanaz/HireDot2.git`
-
-### Step 2
-
-- **HACK AWAY!** 🔨🔨🔨
-
-### Step 3
-
-- 🔃 Create a new pull request using <a href="https://github.com/joanaz/HireDot2/compare/" target="_blank">`https://github.com/joanaz/HireDot2/compare/`</a>.
-
----
-
-## Team
-
-> Or Contributors/People
-
-| <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> | <a href="http://fvcproductions.com" target="_blank">**FVCproductions**</a> |
-| :---: |:---:| :---:|
-| [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)    | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com) | [![FVCproductions](https://avatars1.githubusercontent.com/u/4284691?v=3&s=200)](http://fvcproductions.com)  |
-| <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> | <a href="http://github.com/fvcproductions" target="_blank">`github.com/fvcproductions`</a> |
-
-- You can just grab their GitHub profile image URL
-- You should probably resize their picture using `?s=200` at the end of the image URL.
-
----
-
-## FAQ
-
-- **How do I do *specifically* so and so?**
-    - No problem! Just do this.
-
----
-
-## Support
-
-Reach out to me at one of the following places!
-
-- Website at <a href="http://fvcproductions.com" target="_blank">`fvcproductions.com`</a>
-- Twitter at <a href="http://twitter.com/fvcproductions" target="_blank">`@fvcproductions`</a>
-- Insert more social links here.
-
----
-
-## Donations (Optional)
-
-- You could include a <a href="https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png" target="_blank">Gratipay</a> link as well.
-
-[![Support via Gratipay](https://cdn.rawgit.com/gratipay/gratipay-badge/2.3.0/dist/gratipay.png)](https://gratipay.com/fvcproductions/)
+<img src="https://github.com/TheKermitFrog/ck/blob/master/whole_website_view.png">
