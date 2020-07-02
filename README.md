@@ -21,7 +21,7 @@
 - All the `code` required to get started
 - Images of what it should look like
 
-### Calling django's management function with django-crontab
+## Calling django's management function with django-crontab
 
 - Clone this repo to your local machine using `https://github.com/fvcproductions/SOMEREPO`
 
