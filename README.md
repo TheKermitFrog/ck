@@ -12,8 +12,8 @@
 **Project Highlights**
 
 - Using Spotipy to retrieve data from Spotify via django-crontab
-- [Letting django-crontab pass Spotipy's authentication flow](#Letting django-crontab pass Spotipy's authentication flow)
-- [Calling django's management function with django-crontab](#Calling django's management function with django-crontab)
+- [Letting django-crontab pass Spotipy's authentication flow](##Letting django-crontab pass Spotipy's authentication flow)
+- [Calling django's management function with django-crontab](##Calling django's management function with django-crontab)
 ---
 
 ## Letting django-crontab pass Spotipy's authentication flow
