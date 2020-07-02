@@ -9,6 +9,10 @@
 - homepage css style credits to : <a href="https://www.w3schools.com/w3css/w3css_templates.asp" target="_blank">W3.CSS Templates</a>
 - Table css credits to : <a href="https://datatables.net/" target="_blank">DataTables</a>
 
+> Project Description
+
+This web application manage two Spotify playlists with Spotify's API, songs in collaborative playlist would be delete on a weekly basis from the collaborative playlist and move to another private playlist which serves as an archive. During the process, additional information for each song is fetched from the API and update to the website's database.
+
 > Project Highlights
 
 - Using Spotipy to retrieve data from Spotify via django-crontab
